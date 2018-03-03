@@ -30,14 +30,24 @@ namespace Konscious.Security.Cryptography
         /// </summary>
         public override byte[] GetBytes(int bc)
         {
-            return GetBytesAsync(bc).Result;
-        }
+#if !NET35
+      return GetBytesAsync(bc).Result;
+#else
+      return GetBytesAsync(bc);
+#endif
+    }
 
 
         /// <summary>
         /// Implementation of GetBytes
         /// </summary>
-        public Task<byte[]> GetBytesAsync(int bc)
+        public
+#if !NET35
+      Task<byte[]>
+#else
+      byte[]
+#endif
+      GetBytesAsync(int bc)
         {
             if (bc > 1024)
                 throw new NotSupportedException("Current implementation of Argon2 only supports generating up to 1024 bytes");
