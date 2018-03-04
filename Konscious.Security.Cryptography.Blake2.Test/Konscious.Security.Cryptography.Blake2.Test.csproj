@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <VersionPrefix>1.0.4</VersionPrefix>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Konscious.Security.Cryptography.snk</AssemblyOriginatorKeyFile>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>

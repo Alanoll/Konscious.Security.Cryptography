@@ -7,7 +7,7 @@ namespace Konscious.Security.Cryptography
     /// <summary>
     /// An implementation of Argon2 https://github.com/P-H-C/phc-winner-argon2
     /// </summary>
-    public abstract class Argon2 : DeriveBytes
+    public abstract class Argon2 : DeriveBytes, IDisposable
     {
         /// <summary>
         /// Create an Argon2 for encrypting the given password
@@ -31,23 +31,22 @@ namespace Konscious.Security.Cryptography
         public override byte[] GetBytes(int bc)
         {
 #if !NET35
-      return GetBytesAsync(bc).Result;
+            return GetBytesAsync(bc).Result;
 #else
-      return GetBytesAsync(bc);
+            return GetBytesAsync(bc);
 #endif
-    }
+        }
 
 
         /// <summary>
         /// Implementation of GetBytes
         /// </summary>
-        public
 #if !NET35
-      Task<byte[]>
+        public Task<byte[]>
 #else
-      byte[]
+        internal byte[]
 #endif
-      GetBytesAsync(int bc)
+        GetBytesAsync(int bc)
         {
             if (bc > 1024)
                 throw new NotSupportedException("Current implementation of Argon2 only supports generating up to 1024 bytes");
@@ -105,5 +104,12 @@ namespace Konscious.Security.Cryptography
         internal abstract Argon2Core BuildCore(int bc);
 
         private byte[] _password;
+
+#if NET35
+#pragma warning disable CS1591
+        public void Dispose()
+        {}
+#pragma warning restore CS1591
+#endif
     }
 }

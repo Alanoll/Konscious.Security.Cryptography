@@ -8,6 +8,9 @@ https://password-hashing.net/#argon2
 Usage follows standard types found in System.Security.Cryptography in corefx. Specifically DeriveBytes.</Description>
     <Copyright>(c) 2017 Keef Aragon</Copyright>
     <AssemblyTitle>Konscious.Security.Cryptography.Argon2</AssemblyTitle>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Konscious.Security.Cryptography.snk</AssemblyOriginatorKeyFile>
     <VersionPrefix>1.1.1</VersionPrefix>
     <Authors>Keef Aragon</Authors>
     <TargetFrameworks>netcoreapp1.1;net451;netstandard1.3;net35</TargetFrameworks>
@@ -61,6 +64,10 @@ Usage follows standard types found in System.Security.Cryptography in corefx. Sp
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\Konscious.Security.Cryptography.snk" Link="Konscious.Security.Cryptography.snk" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Konscious.Security.Cryptography.Blake2\Konscious.Security.Cryptography.Blake2.csproj" />
   </ItemGroup>
 
@@ -71,10 +78,6 @@ Usage follows standard types found in System.Security.Cryptography in corefx. Sp
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
     <PackageReference Include="System.IO.UnmanagedMemoryStream" Version="4.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
-    <PackageReference Include="TaskParallelLibrary" Version="1.0.2856" />
   </ItemGroup>
 
 </Project>
